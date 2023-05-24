@@ -1,43 +1,151 @@
 ﻿@page "/booking-request"
+<PageTitle>booking request</PageTitle>
 
-<div id="magazine-section">
+@using Webshop.Models
+@using Webshop.Models.Repositories
+<div class="booking-container">
     <img src="/images-event/booking-header2.jpg" />
-</div>
 
-<div class="row">
-    <div class="col">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h3 class="mt-5 mb-5" style="font-weight:600; text-align:center;">Tell Us More</h3>
+            <EditForm Model="@NewRequest" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <input value="@NewRequest.BookingId" type="hidden" />
 
+                <div class="form-group row mt-2 justify-content-center">
+                    <div class="col-12">
+                        <a class="heading-text-field">name</a>
+                        <a class="required-text-field">(required)</a>
+                        <div class="col-md-7 col-lg-6 col-xl-3 mt-2">
+                            <ValidationMessage For="@(()=> NewRequest.Firstname)" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 mt-2 mb-3">
+                        <label for="firstname" style="font-size:13px;">first</label>
+                        <InputText class="input-field w-100" id="Firstname" @bind-Value="NewRequest.Firstname"></InputText>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-6 mt-2 mb-3">
+                        <label for="lastname" style="font-size:13px;">last</label>
+                        <InputText class="input-field w-100" id="Lastname" @bind-Value="NewRequest.Lastname"></InputText>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">email</a>
+                        <a class="required-text-field">(required)</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <div class="col-md-7 col-lg-6 col-xl-3 mb-2">
+                        <ValidationMessage For="@(()=> NewRequest.Email)" />
+                            </div>
+                        <InputText class="input-field w-100" id="Email" @bind-Value="NewRequest.Email"></InputText>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">phone</a>
+                        <a class="required-text-field">(required)</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <div class="col-md-7 col-xl-4 mb-2">
+                        <ValidationMessage For="@(()=> NewRequest.PhoneNumber)" />
+                            </div>
+                        <InputText class="input-field w-100" id="Phone" @bind-Value="NewRequest.PhoneNumber"></InputText>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">when is the event happening?</a>
+                        <a class="required-text-field">(required)</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <div class="col-md-8 col-lg-6 col-xl-3">
+                        <ValidationMessage For="@(()=> NewRequest.DateOfEvent)" />
+                            </div>
+                        <InputDate class="input-field w-25" @bind-Value="NewRequest.DateOfEvent"></InputDate>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">how many people?</a>
+                        <a class="required-text-field">(required)</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <div class="col-md-10 col-xl-5 mb-2">
+                        <ValidationMessage For="@(()=> NewRequest.NumberOfGuests)" />
+                            </div>
+                        <InputNumber class="input-field w-100" id="People" @bind-Value="NewRequest.NumberOfGuests"></InputNumber>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">location</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <InputText class="input-field w-100" id="Location" @bind-Value="NewRequest.Location"></InputText>
+                    </div>
+                    <div class="col-12">
+                        <a class="heading-text-field">estimated budget?</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <InputNumber class="input-field w-100" id="Budget" @bind-Value="NewRequest.Budget"></InputNumber>
+                    </div>
+
+                    <div class="col-12">
+                        <a class="heading-text-field">type of event?</a>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <InputSelect class="input-field w-100" @bind-Value="NewRequest.EventType" style="border-radius:12px;">
+                            @foreach (var type in EventTypes)
+                            {
+                                <option class="dropdown-text">@type.Event</option>
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                        <button type="submit" class="saveButton mt-5 mb-5">Submit</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
     </div>
-    <div class="col">
-
-    </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @code {
+
+    private BookingRequest NewRequest { get; set; } = new();
+    private IEnumerable<EventType> EventTypes = new List<EventType>();
+
+    [Inject]
+    IEventRepository? EventRepository { get; set; }
+    [Inject]
+    IBookingRequestRepository BookingRequestRepository { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //NewRequest.DateOfEvent = yyyy-mm-dd;
+
+        EventTypes = await EventRepository.GetAllEventTypes();
+    }
+
+
+
+    private async Task HandleValidSubmit()
+    {
+        if (BookingRequestRepository != null)
+        {
+            try
+            {
+                await BookingRequestRepository.AddBookingRequest(NewRequest);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
 
 }
