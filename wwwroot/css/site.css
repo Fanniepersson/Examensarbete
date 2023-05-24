@@ -1,44 +1,30 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;500&family=Roboto:ital,wght@0,100;0,400;1,100;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,300;0,400;1,400&display=swap');
 
-/** {
-    outline: 1px solid red;
-}*/
+* {
+    /*outline: 1px solid red;*/
+    max-width: 1920px;
+}
 
 html, body {
-    /*font-family: 'Roboto', Roboto, Raleway;*/
     max-width: 100%;
 }
 a:hover{
     color:black;
 }
-.pencil-banner {
-    background-color: black;
-    text-align: center;
-    height: 40px;
-    max-width: 100%;
-}
-.pencil-banner-text {
-    font-size: 0.8rem;
-    color: #fff;
-    text-decoration: none;
-    font-family: Raleway;
-}
-    .pencil-banner-text:hover{
-        color:white;
-    }
-
 .header {
     position: relative;
-    z-index: 2100;
-    top: 0;
+    /*z-index: 2100;*/
+    /* top: 0;
     left: 0;
-    right: 0;
-    height: 60px;
-    color: #fff;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    right: 0;*/
+    height: 80px;
+  /*  -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;*/
 }
 
 .header-nav-menu {
@@ -50,24 +36,28 @@ a:hover{
 .header-nav-menu-item {
     display: inline-block;
     margin: 0 5px;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    font-family: Montserrat;
 }
 
 .link-nav {
     font-weight: 400;
-    color: #494949;
+    color: black;
     text-decoration: none;
     background: none;
     border: none;
+    font-size: 13px;
 }
 
 .header-container {
+    position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
-    height: 100%;
-    position: inherit;
+    height: 80px;
+    /*position: inherit;*/
     z-index: 20;
-    background-color: #fff;
+    background-color: #CCC5B5;
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
@@ -82,7 +72,6 @@ a:hover{
 #header-image {
     position: relative;
     text-align: center;
-    color:white;
 }
 
 #header-image img{
@@ -94,9 +83,22 @@ a:hover{
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: Playfair;
+    font-family: Montserrat;
+}
+.heading-text {
+    font-family: Source Serif Pro;
+    font-weight: 300;
+    font-size: 60px;
+    color: #F3EFE8;
 }
 
+.heading-about {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Montserrat;
+}
 .frontpage-button {
     width: 200px;
     padding: 15px 0;
@@ -120,14 +122,14 @@ a:hover{
     position: relative;
     text-align: center;
     color: black;
+    font-family: Montserrat;
 }
     #about-us-section img {
         max-width: 100%;
-        height: auto;
+        height: 50%;
     }
 
 #magazine-section {
-    top: 10px;
     position: relative;
     text-align: center;
     color: white;
@@ -137,29 +139,25 @@ a:hover{
         max-height: 50%;
     }
 .footer-section {
-    margin-top: 4rem;
-    left: 0;
-    bottom: 0;
-    /*min-width: 100%;*/
     max-width: 100%;
-    background-color: black;
-    color: white;
+    background-color: #CCC5B5;
+    color: black;
 }
 
     .footer-section h4 {
-        font-family: Playfair;
+        font-family: Montserrat;
     }
     .footer-section h6 {
         font-family: Raleway;
         font-weight: 400;
         font-size: 0.7rem;
-        color:lightgray;
+        color:black;
     }
 .footer-text {
     font-family: Raleway;
     font-weight: 400;
     font-size: 0.7rem;
-    color: lightgray;
+    color: black;
 }
 input {
     padding-left: 0.6rem;
@@ -177,6 +175,38 @@ input {
     font-size:0.8rem;
     color:black;
 }
+
+
+.about-header {
+    font-family: Source Serif Pro;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #F3EFE8;
+    font-size: 80px;
+    font-weight: 300;
+}
+
+.about-content {
+    font-family:Montserrat;
+}
+
+.about-container {
+    background-color: #F3EFE8;
+}
+
+.about-container img{
+    max-width:100%;
+}
+
+
+
+
+
+
+
+
 
 #blazor-error-ui {
     background: lightyellow;
