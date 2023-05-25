@@ -134,7 +134,7 @@ a:hover{
     color: black;
 }
 
-    .footer-section h4 {
+    .footer-section h5 {
         font-family: Montserrat;
     }
     .footer-section h6 {
@@ -170,16 +170,18 @@ input {
 .about-header {
     font-family: Source Serif Pro;
     position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     color: #F3EFE8;
     font-size: 80px;
     font-weight: 300;
 }
 
-.about-content {
+.about-heading {
+    font-weight: 600;
+    color: #514D4C;
     font-family:Montserrat;
+}
+.about-content {
+    font-family: Montserrat;
 }
 
 .about-container {
@@ -245,10 +247,65 @@ input {
     padding-left:1rem;
     padding-right: 1rem;
 }
+.gallery-container {
+    display: flex;
+    padding: 0 35px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #F3EFE8;
+}
+.wrapper {
+    max-width: 1200px;
+    position: relative;
+}
+.wrapper i{
+    background: #fff;
+    height: 46px;
+    width: 46px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    line-height: 46px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.wrapper i:first-child{
+    left: -23px;
+    z-index: 1;
+}
+.wrapper i:last-child{
+    right: -23px;
+}
+.wrapper .carousel {
+    font-size:0px;
+    cursor: pointer;
+    overflow:hidden;
+    white-space: nowrap;
+    /*scroll-behavior: smooth;*/
+}
+.carousel img{
+    height: 500px;
+    object-fit: cover;
+    margin-left: 14px;
+    width: calc(100% / 3);
+}
+.carousel img:first-child{
+    margin-left: 0px;
+}
 
-
-
-
+@media screen and (max-width: 900px){
+    .carousel img{
+        width: calc(100% / 2);
+    }
+}
+@media screen and (max-width: 550px) {
+    .carousel img {
+        width: 100%;
+    }
+}
 
 
 

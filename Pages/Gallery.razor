@@ -1,5 +1,63 @@
 ﻿@page "/gallery"
 
+<PageTitle>gallery</PageTitle>
+
+<div class="gallery-container">
+    <div class="mt-5">
+        <h3 class="about-heading mt-5 mb-4">Children's Birthday Party</h3>
+        <div class="wrapper">
+            <i id="left" class="fa-solid fa-angle-left"></i>
+            <div class="carousel">
+                <img src="/images-slide-3/1.jpg" />
+                <img src="/images-slide-3/2.jpg" />
+                <img src="/images-slide-3/3.jpg" />
+                <img src="/images-slide-3/4.jpg" />
+                <img src="/images-slide-3/5.jpg" />
+                <img src="/images-slide-3/7.jpg" />
+                <img src="/images-slide-3/8.jpg" />
+            </div>
+            <i id="right" class="fa-solid fa-angle-right" @*@onclick="RightClick" *@></i>
+        </div>
+    </div>
+
+    @*<div class="mt-5">
+        <h3 class="about-heading mt-5 mb-4">Children's Birthday Party</h3>
+        <div class="wrapper">
+            <i id="left" class="fa-solid fa-angle-left"></i>
+            <div class="carousel">
+                <img src="/images-slide-3/1.jpg" />
+                <img src="/images-slide-3/2.jpg" />
+                <img src="/images-slide-3/3.jpg" />
+                <img src="/images-slide-3/4.jpg" />
+                <img src="/images-slide-3/5.jpg" />
+                <img src="/images-slide-3/7.jpg" />
+                <img src="/images-slide-3/8.jpg" />
+            </div>
+            <i id="right" class="fa-solid fa-angle-right" @*@onclick="RightClick" *@></i>
+        </div>
+    </div>*@
+
+</div>
+
+
 @code {
+
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
+
+
+    //protected async void RightClick()
+    //{
+    //    var jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./script/isolationScript.js");
+    //    await jsModule.InvokeVoidAsync("rightClickArrow");
+    //}
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("slideshow.init");
+        }
+    }
 
 }

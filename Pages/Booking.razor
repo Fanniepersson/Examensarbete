@@ -1,10 +1,12 @@
 ﻿@page "/booking-request"
 <PageTitle>booking request</PageTitle>
-
 @using Webshop.Models
 @using Webshop.Models.Repositories
+
 <div class="booking-container">
-    <img src="/images-event/booking-header2.jpg" />
+    <div>
+        <img src="/images-event/booking-header2.jpg" />
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-4">
@@ -37,8 +39,8 @@
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-7 col-lg-6 col-xl-3 mb-2">
-                        <ValidationMessage For="@(()=> NewRequest.Email)" />
-                            </div>
+                            <ValidationMessage For="@(()=> NewRequest.Email)" />
+                        </div>
                         <InputText class="input-field w-100" id="Email" @bind-Value="NewRequest.Email"></InputText>
                     </div>
 
@@ -48,8 +50,8 @@
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-7 col-xl-4 mb-2">
-                        <ValidationMessage For="@(()=> NewRequest.PhoneNumber)" />
-                            </div>
+                            <ValidationMessage For="@(()=> NewRequest.PhoneNumber)" />
+                        </div>
                         <InputText class="input-field w-100" id="Phone" @bind-Value="NewRequest.PhoneNumber"></InputText>
                     </div>
 
@@ -59,8 +61,8 @@
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-8 col-lg-6 col-xl-3">
-                        <ValidationMessage For="@(()=> NewRequest.DateOfEvent)" />
-                            </div>
+                            <ValidationMessage For="@(()=> NewRequest.DateOfEvent)" />
+                        </div>
                         <InputDate class="input-field w-25" @bind-Value="NewRequest.DateOfEvent"></InputDate>
                     </div>
 
@@ -70,8 +72,8 @@
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-10 col-xl-5 mb-2">
-                        <ValidationMessage For="@(()=> NewRequest.NumberOfGuests)" />
-                            </div>
+                            <ValidationMessage For="@(()=> NewRequest.NumberOfGuests)" />
+                        </div>
                         <InputNumber class="input-field w-100" id="People" @bind-Value="NewRequest.NumberOfGuests"></InputNumber>
                     </div>
 
@@ -108,7 +110,6 @@
             </EditForm>
         </div>
     </div>
-
 </div>
 
 
@@ -125,11 +126,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //NewRequest.DateOfEvent = yyyy-mm-dd;
+        NewRequest.DateOfEvent = DateTime.Today;
 
         EventTypes = await EventRepository.GetAllEventTypes();
     }
-
 
 
     private async Task HandleValidSubmit()

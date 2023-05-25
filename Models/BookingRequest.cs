@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Webshop.Models
 {
@@ -15,6 +16,7 @@ namespace Webshop.Models
         [Required(ErrorMessage = "phone is required.")]
         public string? PhoneNumber { get; set; }
         [Required(ErrorMessage = "when is the event happening? is required.")]
+        [DisplayName("yyy-mm-dd")]
         public DateTime DateOfEvent { get; set; }
         [Required(ErrorMessage = "how many people? is required.")]
         public int? NumberOfGuests { get; set; }
