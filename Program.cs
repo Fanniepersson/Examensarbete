@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 using Webshop.Data;
 using Webshop.Models.Repositories;
+using Webshop.State;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IBookingRequestRepository, BookingRequestRepository>();
-
+builder.Services.AddScoped<ApplicationState>();
+builder.Services.AddMudServices();
 
 //Inject DbContext
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(

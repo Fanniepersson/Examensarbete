@@ -16,13 +16,13 @@ namespace Webshop.Models
         [Required(ErrorMessage = "phone is required.")]
         public string? PhoneNumber { get; set; }
         [Required(ErrorMessage = "when is the event happening? is required.")]
-        [DisplayName("yyy-mm-dd")]
-        public DateTime DateOfEvent { get; set; }
+        public DateTime? DateOfEvent { get; set; }
         [Required(ErrorMessage = "how many people? is required.")]
         public int? NumberOfGuests { get; set; }
         public string Location { get; set; }
         public int? Budget { get; set; }
         public string Description { get; set; }
+        public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
     }
 }

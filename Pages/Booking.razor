@@ -2,6 +2,7 @@
 <PageTitle>booking request</PageTitle>
 @using Webshop.Models
 @using Webshop.Models.Repositories
+@using Webshop.State
 
 <div class="booking-container">
     <div>
@@ -18,7 +19,7 @@
                 <div class="form-group row mt-2 justify-content-center">
                     <div class="col-12">
                         <a class="heading-text-field">name</a>
-                        <a class="required-text-field">(required)</a>
+                        <a class="text-field">(required)</a>
                         <div class="col-md-7 col-lg-6 col-xl-3 mt-2">
                             <ValidationMessage For="@(()=> NewRequest.Firstname)" />
                         </div>
@@ -35,7 +36,7 @@
 
                     <div class="col-12">
                         <a class="heading-text-field">email</a>
-                        <a class="required-text-field">(required)</a>
+                        <a class="text-field">(required)</a>
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-7 col-lg-6 col-xl-3 mb-2">
@@ -46,7 +47,7 @@
 
                     <div class="col-12">
                         <a class="heading-text-field">phone</a>
-                        <a class="required-text-field">(required)</a>
+                        <a class="text-field">(required)</a>
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-7 col-xl-4 mb-2">
@@ -57,18 +58,18 @@
 
                     <div class="col-12">
                         <a class="heading-text-field">when is the event happening?</a>
-                        <a class="required-text-field">(required)</a>
+                        <a class="text-field">(required)</a>
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
-                        <div class="col-md-8 col-lg-6 col-xl-3">
+                        <div class="col-md-8 col-lg-6 col-xl-7 mb-2">
                             <ValidationMessage For="@(()=> NewRequest.DateOfEvent)" />
                         </div>
-                        <InputDate class="input-field w-25" @bind-Value="NewRequest.DateOfEvent"></InputDate>
+                        <InputDate class="input-field w-25" autocomplete="false" @bind-Value="NewRequest.DateOfEvent"></InputDate>
                     </div>
 
                     <div class="col-12">
                         <a class="heading-text-field">how many people?</a>
-                        <a class="required-text-field">(required)</a>
+                        <a class="text-field">(required)</a>
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
                         <div class="col-md-10 col-xl-5 mb-2">
@@ -94,27 +95,43 @@
                         <a class="heading-text-field">type of event?</a>
                     </div>
                     <div class="col-sm-12 col-lg-12 mt-2 mb-3">
-                        <InputSelect class="input-field w-100" @bind-Value="NewRequest.EventType" style="border-radius:12px;">
+                        <InputSelect class="input-field w-100" @bind-Value="NewRequest.EventTypeId" style="border-radius:12px;">
+                            <option value="" selected>-- Select a type --</option>
                             @foreach (var type in EventTypes)
                             {
-                                <option class="dropdown-text">@type.Event</option>
+                                <option class="dropdown-text" value="@type.EventTypeId">@type.Event</option>
                             }
                         </InputSelect>
                     </div>
+                    <div class="col-12">
+                        <a class="heading-text-field">description</a>
+                        <p class="text-field mt-2">Describe the event and give us all the details & wishes</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mt-2 mb-3">
+                        <InputTextArea class="input-field-description w-100" id="Description" @bind-Value="NewRequest.Description"></InputTextArea>
+                    </div>
                 </div>
+
                 <div class="row justify-content-center">
-                    <div class="col-2">
-                        <button type="submit" class="saveButton mt-5 mb-5">Submit</button>
+                    <div class="col-6 col-xl-3">
+                        <button type="submit" class="saveButton mt-5 mb-4">@buttonText</button>
                     </div>
                 </div>
             </EditForm>
+            @if (sucessfulSubmit)
+            {
+                <div class="row justify-content-center mb-5">
+                    <div class="request-answer col-12 col-xl-12">
+                      <p class="mt-3 ms-2 me-2 mb-3">Thank you! We will contact you within 1-2 business days.</p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
 
 
 @code {
-
     private BookingRequest NewRequest { get; set; } = new();
     private IEnumerable<EventType> EventTypes = new List<EventType>();
 
@@ -123,10 +140,16 @@
     [Inject]
     IBookingRequestRepository BookingRequestRepository { get; set; }
 
+    private bool isLoading { get; set; } = false;
+    public bool sucessfulSubmit { get; set; } = false;
+    private string buttonText = "Submit";
+
+
 
     protected override async Task OnInitializedAsync()
     {
         NewRequest.DateOfEvent = DateTime.Today;
+        isLoading = false;
 
         EventTypes = await EventRepository.GetAllEventTypes();
     }
@@ -134,6 +157,9 @@
 
     private async Task HandleValidSubmit()
     {
+        isLoading = true;
+        buttonText = "Submitting...";
+
         if (BookingRequestRepository != null)
         {
             try
@@ -142,9 +168,12 @@
             }
             catch (Exception)
             {
-
                 throw;
             }
+            isLoading = false;
+            sucessfulSubmit = true;
+            buttonText = "Submitted!";
+            //NewRequest = null;
         }
     }
 

@@ -192,6 +192,18 @@ input {
     max-width:100%;
 }
 
+
+.admin-container {
+    background-color: #F3EFE8;
+    min-height: 100vh;
+    font-family: Montserrat;
+}
+.active-requests {
+    border: 2px solid #B7B7AB;
+}
+th, td{
+    border: none;
+}
 .booking-container {
     background-color: #F3EFE8;
     font-family: Montserrat;
@@ -215,8 +227,18 @@ input {
         outline-style: solid;
     }
 
-.required-text-field {
-    font-size: 12px;
+.input-field-description {
+    border: #F3EFE8;
+    min-height: 100px;
+    font-size: 13px;
+}
+    .input-field-description:focus {
+        outline-color: #CCC5B5;
+        outline-style: solid;
+    }
+
+.text-field {
+    font-size: 13px;
     text-decoration: none;
     color: #514873;
 }
@@ -237,18 +259,25 @@ input {
     .saveButton:hover {
         box-shadow: 1px 1px 10px #514D4C;
     }
+.request-answer {
+    background-color: #B7B7AB;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-align: center;
+    border: 2px solid #CCC5B5;
+}
 .validation-message {
     background-color: #CE2C30;
-    color:white;
-    font-weight:400;
+    color: white;
+    font-weight: 400;
     font-size: 14px;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    padding-left:1rem;
+    padding-left: 1rem;
     padding-right: 1rem;
 }
 .gallery-container {
-    display: flex;
+    /*display: flex;*/
     padding: 0 35px;
     align-items: center;
     justify-content: center;
