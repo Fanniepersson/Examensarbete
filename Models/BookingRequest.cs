@@ -24,5 +24,14 @@ namespace Webshop.Models
         public string Description { get; set; }
         public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
+        public DateTime RequestDate { get; set; }
+        public Status Status { get; set; }
+    }
+
+    public enum Status
+    {
+        NotSet,
+        Accepted,
+        Dismissed
     }
 }

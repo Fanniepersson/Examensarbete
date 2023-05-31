@@ -4,31 +4,82 @@
 <div class="modal" id="editRequestModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body row">
-               @* <EditForm Model="@Request">
-                    <input value="@Request.BookingId" type="hidden" />
+            <div class="modal-body">
+                <div class="row justify-content-end me-1">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <EditForm Model="@BookingRequest">
+                    <input value="@BookingRequest.BookingId" type="hidden" />
 
                     <div class="form-group row">
-                        <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+                        <label for="firstname" class="col-sm-12 col-form-label">Name</label>
+                        <div class="col-sm-6">
+                            <InputText @bind-Value="SelectedRequest.Firstname" class="input-form" disabled placeholder=SelectedRequest.Firstname />
+                        </div>
+                        <div class="col-sm-6">
+                            <InputText @bind-Value="SelectedRequest.Lastname" class="input-form" disabled placeholder=SelectedRequest.Lastname />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-12 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <InputText @bind-Value="SelectedRequest.Firstname" class="form-control" placeholder=SelectedOffice.OfficeName />
+                            <InputText @bind-Value="SelectedRequest.Email" class="input-form w-100" disabled placeholder=SelectedRequest.Email />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-12 col-form-label">Phone</label>
+                        <div class="col-sm-10">
+                            <InputText @bind-Value="SelectedRequest.PhoneNumber" class="input-form w-100" disabled placeholder=SelectedRequest.PhoneNumber />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="location" class="col-sm-12 col-form-label">Location</label>
+                        <div class="col-sm-10">
+                            <InputText @bind-Value="SelectedRequest.Location" class="input-form w-100" disabled placeholder=SelectedRequest.Location />
                         </div>
                     </div>
 
-                    <div class="modal-footer mt-3">
-                        <div class="col-md-1 d-flex justify-content-md-start">
-                            <p><a class="tooltip-test" title="Radera kontor"><i data-bs-dismiss="modal" @onclick="(() => DismissRequest(SelectedRequest.BookingId))" class="fa-solid fa-trash"></i></a></p>
-                        </div>
-
-                        <div class="col d-flex justify-content-md-end">
-                            <button type="submit" class="myBeigeButton" @onclick="(() => AcceptRequest(SelectedRequest))" data-bs-dismiss="modal">Spara & Stäng</button>
+                    <div class="form-group row">
+                        <label for="budget" class="col-sm-12 col-form-label">Budget</label>
+                        <div class="col-sm-6">
+                            <InputNumber @bind-Value="SelectedRequest.Budget" class="input-form w-100" disabled placeholder=SelectedRequest.Budget />
                         </div>
                     </div>
-                </EditForm>*@
+                    <div class="form-group row">
+                        <label for="guests" class="col-sm-12 col-form-label">Guests</label>
+                        <div class="col-sm-6">
+                            <InputNumber @bind-Value="SelectedRequest.NumberOfGuests" class="input-form w-100" disabled placeholder=SelectedRequest.NumberOfGuests />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-12 col-form-label">Description</label>
+                        <div class="col-sm-12">
+                            <InputTextArea @bind-Value="SelectedRequest.Description" disabled class="input-form w-100" placeholder=SelectedRequest.Description />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="eventType" class="col-sm-12 col-form-label">Event type</label>
+                        <div class="col-sm-10">
+                            @if (SelectedRequest.EventType != null)
+                            {
+                                <a>@SelectedRequest.EventType.Event</a>
+                            }
+                        </div>
+                    </div>
+
+                    @*<div class="modal-footer mt-3">*@
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <button class="save-button" data-bs-dismiss="modal" @onclick="(() => DismissRequest(SelectedRequest))">Dismiss request</button>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button type="submit" class="save-button" @onclick="(() => AcceptRequest(SelectedRequest))" data-bs-dismiss="modal">Accept request</button>
+                            </div>
+                        </div>
+                    @*</div>*@
+                </EditForm>
             </div>
         </div>
     </div>
@@ -42,15 +93,15 @@
     [Inject]
     IBookingRequestRepository? BookingRequestRepository { get; set; }
 
-    public BookingRequest Request { get; set; } = new();
+    public BookingRequest BookingRequest { get; set; } = new();
 
 
 
-    private async Task DismissRequest(int bookingId)
+    private async Task DismissRequest(BookingRequest request)
     {
         try
         {
-            await BookingRequestRepository.DismissBookingRequest(bookingId);
+            await BookingRequestRepository.DismissBookingRequest(request);
 
             //await OnSave.InvokeAsync();
         }
@@ -60,16 +111,16 @@
         }
     }
 
-    //private async Task AcceptRequest(SelectedRequest request)
-    //{
-    //    try
-    //    {
-    //        await BookingRequestRepository.AcceptBookingRequest(request);
-    //        //await OnSave.InvokeAsync();
-    //    }
-    //    catch (Exception)
-    //    {
-    //        throw;
-    //    }
-    //}
+    private async Task AcceptRequest(BookingRequest request)
+    {
+        try
+        {
+            await BookingRequestRepository.AcceptBookingRequest(request);
+            //await OnSave.InvokeAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }

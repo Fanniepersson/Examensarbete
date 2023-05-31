@@ -336,8 +336,36 @@ th, td{
     }
 }
 
+.input-form {
+    background-color: #F2F1ED;
+    font-family: Montserrat;
+    font-size: 14px;
+}
+.modal-body {
+    font-family: Montserrat;
+}
+.btn-close{
+    height: 0.3em !important;
+    width: 0.3em !important;
+}
+.save-button {
+    background-color: #F2F1ED;
+    border: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 1.5rem;
+}
+    .save-button:hover {
+        box-shadow: 1px 1px 10px #514D4C;
+    }
 
-
+.modal-content {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

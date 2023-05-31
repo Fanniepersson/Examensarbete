@@ -14,9 +14,15 @@ namespace Webshop.Models.Repositories
             _applicationState = applicationState;
         }
 
-        public Task AcceptBookingRequest(BookingRequest request)
+        public async Task AcceptBookingRequest(BookingRequest request)
         {
-            throw new NotImplementedException();
+            var acceptBooking = await _context.BookingRequests.FirstOrDefaultAsync(x => x.BookingId == request.BookingId);
+
+            if (acceptBooking != null)
+            {
+                acceptBooking.Status = Status.Accepted;
+            }
+            
         }
 
         public async Task AddBookingRequest(BookingRequest request)
@@ -26,19 +32,26 @@ namespace Webshop.Models.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task DismissBookingRequest(int id)
+        public async Task DismissBookingRequest(BookingRequest request)
         {
-            throw new NotImplementedException();
+            var dismissBooking = await _context.BookingRequests.FirstOrDefaultAsync(x => x.BookingId == request.BookingId);
+
+            if (dismissBooking != null)
+            {
+                dismissBooking.Status = Status.Dismissed;
+            }
         }
 
         public async Task<IEnumerable<BookingRequest>> GetAllRequests()
         {
-           return await _context.BookingRequests.ToListAsync();
+           return await _context.BookingRequests.Where(x => x.Status == Status.NotSet).ToListAsync();
         }
 
         public async Task<BookingRequest> GetRequestById(int id)
         {
-            var selectedRequest =  await _context.BookingRequests.FirstOrDefaultAsync(x => x.BookingId == id);
+            var selectedRequest =  await _context.BookingRequests.Include(x => x.EventType).FirstOrDefaultAsync(x => x.BookingId == id);
+
+            //var selectedRequestEventType = _context.BookingRequests.Include(x => x.EventType);
             return selectedRequest;
         }
     }

@@ -13,11 +13,11 @@
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>Name</MudTh>
-                    <MudTh Style="text-align:right">booking request id</MudTh>
+                    <MudTh Style="text-align:right">info</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Name">@context.Firstname</MudTd>
-                    <MudTd DataLabel="Id" Style="text-align:right">@context.BookingId</MudTd>
+                    <MudTd DataLabel="Info" Style="text-align:right"><i data-bs-toggle="modal" data-bs-target="#editRequestModal" @onclick="(() => GetBookingRequestById(context.BookingId))" class="fa-solid fa-circle-info"></i></MudTd>
                 </RowTemplate>
             </MudTable>
         </div>
