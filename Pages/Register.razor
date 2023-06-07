@@ -1,0 +1,86 @@
+﻿@page "/create"
+
+@using Microsoft.AspNetCore.Identity
+@using Webshop.Models
+@inject UserManager<IdentityUser> UserManager
+@inject NavigationManager NavigationManager
+
+<div class="modal" id="registrationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="login-header">
+                <div class="login-header-content col-12">
+                    <h4 class="ms-4">Create Account</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3">
+                            <input @bind="@FirstName" class="w-100" placeholder="First Name" />
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <input @bind="@LastName" class="w-100" placeholder="Last Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-11 mb-3">
+                            <input @bind="@Email" class="w-100" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-11 mb-3">
+                            <input @bind="@Password" class="w-100" placeholder="Create Password" />
+                        </div>
+                    </div>
+                   @* <div class="form-group row">
+                        <div class="col-sm-11 mb-3">
+                            <input @bind="@ReEnterPassword" class="w-100" placeholder="Re-type Password" />
+                        </div>
+                    </div>*@
+                    <button class="sign-in-button" id="login-submit" type="submit" @onclick="RegisterNewUser">Register</button>
+                </form>
+            </div>
+            <div class="registration-footer mt-2 mb-2">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <a class="modal-footer-text" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account? Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    protected string FirstName { get; set; }
+    protected string LastName { get; set; }
+    protected string Email { get; set; }
+    protected string Password { get; set; }
+    //protected string ReEnterPassword { get; set; }
+
+    private async Task RegisterNewUser()
+    {
+        var user = new IdentityUser
+            {
+                UserName = Email,
+                Email = Email,
+                PasswordHash = Password
+            };
+
+        var result = await UserManager.CreateAsync(user, Password);
+        var a = result;
+        var b = a;
+
+        if (result.Succeeded)
+        {
+            // Registration successful, you can redirect or perform additional actions
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            // Handle registration failure
+        }
+    }
+}

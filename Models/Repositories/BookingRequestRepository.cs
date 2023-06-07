@@ -1,17 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webshop.Data;
-using Webshop.State;
 
 namespace Webshop.Models.Repositories
 {
     public class BookingRequestRepository : IBookingRequestRepository
     {
         private readonly ApplicationContext _context;
-        private readonly ApplicationState _applicationState;
-        public BookingRequestRepository(ApplicationContext context, ApplicationState applicationState)
+        public BookingRequestRepository(ApplicationContext context)
         {
             _context = context;
-            _applicationState = applicationState;
         }
 
         public async Task AcceptBookingRequest(BookingRequest request)
@@ -21,8 +18,9 @@ namespace Webshop.Models.Repositories
             if (acceptBooking != null)
             {
                 acceptBooking.Status = Status.Accepted;
+                await _context.SaveChangesAsync();
             }
-            
+
         }
 
         public async Task AddBookingRequest(BookingRequest request)
@@ -39,12 +37,13 @@ namespace Webshop.Models.Repositories
             if (dismissBooking != null)
             {
                 dismissBooking.Status = Status.Dismissed;
+                await _context.SaveChangesAsync();
             }
         }
 
         public async Task<IEnumerable<BookingRequest>> GetAllRequests()
         {
-           return await _context.BookingRequests.Where(x => x.Status == Status.NotSet).ToListAsync();
+           return await _context.BookingRequests.ToListAsync();
         }
 
         public async Task<BookingRequest> GetRequestById(int id)

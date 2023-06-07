@@ -4,41 +4,75 @@
 <PageTitle>administrate requests</PageTitle>
 
 <div class="admin-container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12 col-xxl-5 mt-5 active-requests">
-            <MudTable Items="@Requests.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
-               <ToolBarContent>
+    <div class="row justify-content-around ms-5">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12 col-xxl-4 mt-5 mb-5 active-requests">
+            <MudTable Items="@Requests" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                <ToolBarContent>
                     <MudText Typo="Typo.h6">Booking requests</MudText>
                     <MudSpacer />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>Name</MudTh>
+                    <MudTh>Request date</MudTh>
                     <MudTh Style="text-align:right">info</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="Name">@context.Firstname</MudTd>
+                    <MudTd DataLabel="Name">@context.Firstname @context.Lastname</MudTd>
+                    <MudTd DataLabel="Date">@context.RequestDate</MudTd>
                     <MudTd DataLabel="Info" Style="text-align:right"><i data-bs-toggle="modal" data-bs-target="#editRequestModal" @onclick="(() => GetBookingRequestById(context.BookingId))" class="fa-solid fa-circle-info"></i></MudTd>
                 </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-around ms-5">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12 col-xxl-10 mt-5 mb-5 active-requests">
+            <MudTable Items="@AcceptedRequests" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">Upcoming events</MudText>
+                    <MudSpacer />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Customer</MudTh>
+                    <MudTh>Date</MudTh>
+                    <MudTh>Location</MudTh>
+                    <MudTh Style="text-align:right">info</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@context.Firstname @context.Lastname</MudTd>
+                    <MudTd DataLabel="Date">@context.DateOfEvent</MudTd>
+                    <MudTd DataLabel="Location">@context.Location</MudTd>
+                    <MudTd DataLabel="Info" Style="text-align:right"><i data-bs-toggle="modal" data-bs-target="#editRequestModal" @onclick="(() => GetBookingRequestById(context.BookingId))" class="fa-solid fa-circle-info"></i></MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
             </MudTable>
         </div>
     </div>
 </div>
-<AdministrateRequest SelectedRequest="SelectedRequest" />
-
+<AdministrateRequest SelectedRequest="SelectedRequest" OnSave="UpdateUI" />
 
 @code {
     [Inject]
     IBookingRequestRepository BookingRepository { get; set; }
 
+    private IEnumerable<BookingRequest> AllRequests = new List<BookingRequest>();
     private IEnumerable<BookingRequest> Requests = new List<BookingRequest>();
+    private IEnumerable<BookingRequest> AcceptedRequests = new List<BookingRequest>();
+
     private BookingRequest SelectedRequest = new();
-    private string searchString = "";
 
     protected override async Task OnInitializedAsync()
     {
-        Requests = await BookingRepository.GetAllRequests();
+        AllRequests = await BookingRepository.GetAllRequests();
+        Requests = AllRequests.Where(x => x.Status == Status.NotSet);
+        AcceptedRequests = AllRequests.Where(x => x.Status == Status.Accepted);
     }
-
 
     private async Task GetBookingRequestById(int requestId)
     {
@@ -46,5 +80,10 @@
         {
             SelectedRequest = await BookingRepository.GetRequestById(requestId);
         }
+    }
+
+    private void UpdateUI()
+    {
+        StateHasChanged();
     }
 }

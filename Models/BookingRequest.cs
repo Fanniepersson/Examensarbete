@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Webshop.Models
@@ -16,6 +17,7 @@ namespace Webshop.Models
         [Required(ErrorMessage = "phone is required.")]
         public string? PhoneNumber { get; set; }
         [Required(ErrorMessage = "when is the event happening? is required.")]
+        [BindProperty, DataType(DataType.Date)]
         public DateTime? DateOfEvent { get; set; }
         [Required(ErrorMessage = "how many people? is required.")]
         public int? NumberOfGuests { get; set; }
@@ -24,6 +26,7 @@ namespace Webshop.Models
         public string Description { get; set; }
         public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
+        public Customer Customer { get; set; }
         public DateTime RequestDate { get; set; }
         public Status Status { get; set; }
     }

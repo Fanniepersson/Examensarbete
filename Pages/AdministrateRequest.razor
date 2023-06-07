@@ -9,7 +9,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <EditForm Model="@BookingRequest">
-                    <input value="@BookingRequest.BookingId" type="hidden" />
+                    <div class="form-group row">
+                        <label for="bookingId" class="col-sm-3 col-form-label">booking id:</label>
+                        <div class="col-sm-4">
+                            <InputNumber @bind-Value="SelectedRequest.BookingId" disabled placeholder=SelectedRequest.BookingId />
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label for="firstname" class="col-sm-12 col-form-label">Name</label>
@@ -68,17 +73,19 @@
                         </div>
                     </div>
 
-                    @*<div class="modal-footer mt-3">*@
-                        <div class="row mt-5">
-                            <div class="col-md-6">
-                                <button class="save-button" data-bs-dismiss="modal" @onclick="(() => DismissRequest(SelectedRequest))">Dismiss request</button>
+                    <div class="row d-flex justify-content-center mt-5">
+                        @if (SelectedRequest.Status == Status.NotSet)
+                        {
+                            <div class="col-md-4">
+                                <button class="save-button" data-bs-dismiss="modal" @onclick="(() => DismissRequest(SelectedRequest))">Dismiss</button>
                             </div>
 
-                            <div class="col-md-6">
-                                <button type="submit" class="save-button" @onclick="(() => AcceptRequest(SelectedRequest))" data-bs-dismiss="modal">Accept request</button>
+                            <div class="col-md-4">
+                                <button type="submit" class="save-button" @onclick="(() => AcceptRequest(SelectedRequest))" data-bs-dismiss="modal">Accept</button>
                             </div>
-                        </div>
-                    @*</div>*@
+
+                        }
+                    </div>
                 </EditForm>
             </div>
         </div>
@@ -89,6 +96,9 @@
 @code {
     [Parameter]
     public BookingRequest SelectedRequest { get; set; }
+
+    [Parameter]
+    public EventCallback OnSave { get; set; }
 
     [Inject]
     IBookingRequestRepository? BookingRequestRepository { get; set; }
@@ -103,7 +113,7 @@
         {
             await BookingRequestRepository.DismissBookingRequest(request);
 
-            //await OnSave.InvokeAsync();
+            await OnSave.InvokeAsync();
         }
         catch (Exception)
         {
@@ -116,7 +126,8 @@
         try
         {
             await BookingRequestRepository.AcceptBookingRequest(request);
-            //await OnSave.InvokeAsync();
+
+            await OnSave.InvokeAsync();
         }
         catch (Exception)
         {

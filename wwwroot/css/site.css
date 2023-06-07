@@ -17,7 +17,7 @@ a:hover{
     color:black;
 }
 .header {
-    position: relative;
+    /*position: relative;*/
     /*z-index: 2100;*/
     /* top: 0;
     left: 0;
@@ -48,7 +48,22 @@ a:hover{
     border: none;
     font-size: 13px;
 }
+    .link-nav:hover{
+        color: black;
+    }
 
+    .link-nav > hr{
+        visibility: hidden;
+        color: black;
+        height: 2px;
+        margin-top: 0.5px;
+        margin-bottom: 0;
+    }
+
+.header-nav-menu-item .link-nav.active > hr{
+    visibility: visible;
+    filter: blur(0.5px);
+}
 .header-container {
     position: fixed;
     top: 0;
@@ -349,13 +364,13 @@ th, td{
     width: 0.3em !important;
 }
 .save-button {
-    background-color: #F2F1ED;
+    background-color: #CCC5B5;
     border: none;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 1.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: 0.5px 0.5px 5px #514D4C;
 }
     .save-button:hover {
         box-shadow: 1px 1px 10px #514D4C;
@@ -366,17 +381,71 @@ th, td{
     -moz-border-radius: 0px !important;
     border-radius: 0px !important;
 }
-#blazor-error-ui {
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+
+#loginModal{
+    font-family:Montserrat;
+    
 }
+#registrationModal {
+    font-family: Montserrat;
+}
+.login-header-content{
+    margin-left: 7.5rem;
+    margin-top: 2rem;
+}
+.sign-in-button {
+    background-color: #3f3f40;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-left: 7rem;
+    border-radius: 4px;
+    box-shadow: 0.5px 0.5px 4px #514D4C;
+}
+.modal-body form{
+    font-size:12px;
+    font-weight: 600;
+    background-color: #fff;
+    color: darkgrey;
+    margin-left: 2rem
+ 
+}
+.modal-body input{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+
+    .modal-body input:focus {
+        outline-color: #3f3f40;
+        /*outline-style: solid;*/
+    }
+
+.modal-footer-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    text-decoration: none;
+    cursor:pointer;
+}
+    .modal-footer-text:hover{
+        color:black;
+    }
+    #blazor-error-ui {
+        background: lightyellow;
+        bottom: 0;
+        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+        display: none;
+        left: 0;
+        padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
 
     #blazor-error-ui .dismiss {
         cursor: pointer;

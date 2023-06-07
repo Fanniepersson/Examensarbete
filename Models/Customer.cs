@@ -15,6 +15,5 @@ namespace Webshop.Models
         public string PhoneNumber { get; set; }
         public string? StreetAdress { get; set; }
         public string? City { get; set; }
-        public Booking Booking { get; set; }
     }
 }

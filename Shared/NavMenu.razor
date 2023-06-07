@@ -1,121 +1,54 @@
-﻿<header class="header">
+﻿@using Webshop.Pages
+<header class="header">
     <div class="header-container">
         <div class="header-nav-left">
             <ul class="header-nav-menu">
                 <li class="header-nav-menu-item ms-3">
-                    <NavLink class="link-nav" href="/">
+                    <NavLink class="link-nav" href="/" Match="NavLinkMatch.All">
                         home
+                        <hr />
                     </NavLink>
                 </li>
                 <li class="header-nav-menu-item ms-5">
-                    <NavLink class="link-nav" href="/booking-request">
+                    <NavLink class="link-nav" href="/booking-request" Match="NavLinkMatch.All">
                         booking request
+                        <hr />
                     </NavLink>
                 </li>
                 <li class="header-nav-menu-item ms-5">
-                    <NavLink class="link-nav" href="/about-and-values">
+                    <NavLink class="link-nav" href="/about-and-values" Match="NavLinkMatch.All">
                         about & values
+                        <hr />
                     </NavLink>
                 </li>
             </ul>
         </div>
         <div class="header-nav-center">
             <NavLink href="/">
-                <a class="header-logo">Fannie Designs</a>
+                <a class="header-logo">Fannie Events</a>
             </NavLink>
         </div>
         <div class="header-nav-right">
             <ul class="header-nav-menu">
                 <li class="header-nav-menu-item me-5">
-                    <NavLink class="link-nav" href="/gallery">
+                    <NavLink class="link-nav" href="/gallery" Match="NavLinkMatch.All">
                         gallery
+                        <hr />
                     </NavLink>
                 </li>
-                <li class="header-nav-menu-item me-3">
-                    <NavLink class="link-nav" href="/">
-                        login
+                <li class="header-nav-menu-item me-5">
+                    <NavLink class="link-nav" href="/admin-page" Match="NavLinkMatch.All">
+                        admin
+                        <hr />
                     </NavLink>
                 </li>
+                <li class="header-nav-menu-item mb-1">
+                       <LoginDisplay />
+                </li> 
             </ul>
         </div>
     </div>
 </header>
 
+<Login/>
 
-@*<nav class="navbar">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div>
-                <ul class="navbar-nav ms-5 mt-3">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                           id="navbarDropdown"
-                           role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li class="dropdown-item">
-                                <NavLink href="/allproducts">
-                                    All products
-                                </NavLink>
-                            </li>
-                            <li class="dropdown-item">
-                                <NavLink href="/cream">
-                                    Cream
-                                </NavLink>
-                            </li>
-                            <li class="dropdown-item">
-                                <NavLink href="/masks">
-                                    Sheetmasks & masks
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul class="navbar-nav ms-4 mt-1">
-                    <li class="nav-item">
-                        <NavLink class="link-nav" href="/">
-                            About
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul class="navbar-nav ms-4 mt-1">
-                    <li class="nav-item">
-                        <NavLink class="link-nav" href="/">
-                            Magazine
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-            <a class="mt-3" style="margin-right:30rem; margin-left:30rem;">Fannie Skincare</a>
-            <div>
-                <ul class="navbar-nav ms-2 mt-1">
-                    <li class="nav-item">
-                        <NavLink class="link-nav" href="/">
-                            Login
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul class="navbar-nav ms-5 mt-1">
-                    <li class="nav-item">
-                        <NavLink class="link-nav" href="/">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
-*@

@@ -2,7 +2,6 @@
 <PageTitle>booking request</PageTitle>
 @using Webshop.Models
 @using Webshop.Models.Repositories
-@using Webshop.State
 
 <div class="booking-container">
     <div>
@@ -148,7 +147,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        NewRequest.DateOfEvent = DateTime.Today;
+        //NewRequest.DateOfEvent = DateTime.Today;
         isLoading = false;
 
         EventTypes = await EventRepository.GetAllEventTypes();
@@ -164,6 +163,7 @@
         {
             try
             {
+                NewRequest.RequestDate = DateTime.Today;
                 await BookingRequestRepository.AddBookingRequest(NewRequest);
             }
             catch (Exception)
@@ -173,7 +173,6 @@
             isLoading = false;
             sucessfulSubmit = true;
             buttonText = "Submitted!";
-            //NewRequest = null;
         }
     }
 
