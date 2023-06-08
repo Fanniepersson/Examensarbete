@@ -46,7 +46,7 @@ a:hover{
     text-decoration: none;
     background: none;
     border: none;
-    font-size: 13px;
+    font-size: 15px;
 }
     .link-nav:hover{
         color: black;
@@ -102,7 +102,7 @@ a:hover{
 .heading-text {
     font-family: Source Serif Pro;
     font-weight: 300;
-    font-size: 60px;
+    font-size: 70px;
     color: #F3EFE8;
 }
 
