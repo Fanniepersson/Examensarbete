@@ -26,39 +26,12 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
 
 builder.Services.AddIdentityCore<IdentityUser>(options =>
 {
-    //options.SignIn.RequireConfirmedAccount = true;
-    //options.Password.RequireDigit = true;
-    //options.Password.RequireLowercase = true;
-    //options.Password.RequireUppercase = true;
-    //options.Password.RequireNonAlphanumeric = true;
-    //options.Password.RequiredLength = 8;
+   
 })
     .AddEntityFrameworkStores<ApplicationContext>()
      .AddSignInManager<SignInManager<IdentityUser>>()
      .AddUserManager<UserManager<IdentityUser>>();
 
-//builder.Services.AddDefaultIdentity<IdentityUser>()
-//    .AddEntityFrameworkStores<ApplicationContext>();
-
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//    .AddEntityFrameworkStores<ApplicationContext>()
-//    .AddDefaultTokenProviders();
-
-
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//    .AddUserStore<User>()
-//    .AddEntityFrameworkStores<ApplicationContext>()
-//    .AddDefaultTokenProviders();
-
-
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-// .AddCookie(options =>
-// {
-//     options.LoginPath = "/User/Login";
-//     options.AccessDeniedPath = "/User/Login";
-//     options.LogoutPath = "/User/Logout";
-//     options.SlidingExpiration = true;
-// });
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -72,8 +45,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddAuthentication()
         .AddGoogle(options =>
         {
-            options.ClientId = "1000468712236-si06l1kehvupv57bar2m8ujg9n8h4359.apps.googleusercontent.com";
-            options.ClientSecret = "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";
+            options.ClientId = "";
+            options.ClientSecret = "";
         });
 
 
