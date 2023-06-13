@@ -1,7 +1,7 @@
 ﻿@using Webshop.Pages
 @inherits LayoutComponentBase
 
-<PageTitle>Fannie Designs</PageTitle>
+<PageTitle>Fannie Events</PageTitle>
 <header>
     <NavMenu />
 </header>
@@ -30,12 +30,15 @@
             </div>
             <div class="col mt-5">
                 <h5>About</h5>
-                <h6>About & values</h6>
+                <NavLink class="footer-section-text" href="/about-and-values" Match="NavLinkMatch.All">
+                    About & Values
+                </NavLink>
             </div>
             <div class="col mt-5">
                 <h5>Account</h5>
                 <h6>Create Account</h6>
-                <h6>Sign In</h6>
+                <NavLink href="Identity/Account/Login" class="footer-section-text">Sign In</NavLink>
+                @*<h6>Sign In</h6>*@
 
             </div>
         </div>

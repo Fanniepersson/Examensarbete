@@ -1,23 +1,27 @@
 ﻿window.slideshow = {
     init: function () {
-        // Get the carousel element
-        var carousel = document.querySelector('.carousel');
-        const firstImg = carousel.querySelectorAll("img")[0];
-        let firstImgWidth = firstImg.clientWidth + 14;
-       
-        //// Get the left and right arrow elements
-        var leftArrow = document.getElementById('left');
-        var rightArrow = document.getElementById('right');
 
+        // Get all wrapper elements
+        var wrappers = document.querySelectorAll('.wrapper');
 
-        //// Add click event listeners to the arrows
+        wrappers.forEach(function (wrapper) {
+            // Get the carousel element within the current wrapper
+            var carousel = wrapper.querySelector('.carousel');
+            const firstImg = carousel.querySelector("img");
+            let firstImgWidth = firstImg.clientWidth + 14;
 
-        leftArrow.addEventListener('click', function () {
-            carousel.scrollLeft -= firstImgWidth;
-        });
+            // Get the left and right arrow elements within the current wrapper
+            var leftArrow = wrapper.querySelector('.left-arrow');
+            var rightArrow = wrapper.querySelector('.right-arrow');
 
-        rightArrow.addEventListener('click', function () {
-            carousel.scrollLeft += firstImgWidth;
+            // Add click event listeners to the arrows within the current wrapper
+            leftArrow.addEventListener('click', function () {
+                carousel.scrollLeft -= firstImgWidth;
+            });
+
+            rightArrow.addEventListener('click', function () {
+                carousel.scrollLeft += firstImgWidth;
+            });
         });
     }
 }

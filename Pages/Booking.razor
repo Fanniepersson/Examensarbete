@@ -4,7 +4,7 @@
 @using Webshop.Models.Repositories
 
 <div class="booking-container">
-    <div class="row justify-content-center">
+    <div class="row col-12 justify-content-center">
         <div class="col-4">
             <h3 class="mt-5 mb-5" style="font-weight:600; text-align:center;">Tell Us More</h3>
             <EditForm Model="@NewRequest" OnValidSubmit="HandleValidSubmit">
@@ -143,7 +143,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //NewRequest.DateOfEvent = DateTime.Today;
         isLoading = false;
 
         EventTypes = await EventRepository.GetAllEventTypes();

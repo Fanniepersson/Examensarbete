@@ -17,14 +17,8 @@ a:hover{
     color:black;
 }
 .header {
-    /*position: relative;*/
-    /*z-index: 2100;*/
-    /* top: 0;
-    left: 0;
-    right: 0;*/
     height: 80px;
-  /*  -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;*/
+    background-color: #CCC5B5 !important;
 }
 
 .header-nav-menu {
@@ -73,8 +67,6 @@ a:hover{
     z-index: 20;
     background-color: #CCC5B5;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -155,15 +147,25 @@ a:hover{
     .footer-section h6 {
         font-family: Raleway;
         font-weight: 400;
-        font-size: 0.7rem;
-        color:black;
+        font-size: 0.8rem;
+        color: black;
     }
-.footer-text {
-    font-family: Raleway;
-    font-weight: 400;
-    font-size: 0.7rem;
-    color: black;
-}
+    .footer-section-text {
+        font-family: Raleway;
+        font-weight: 400;
+        font-size: 0.8rem;
+        color:black;
+        text-decoration: none;
+    }
+        .footer-section-text:hover{
+            color:black;
+        }
+        .footer-text {
+            font-family: Raleway;
+            font-weight: 400;
+            font-size: 0.7rem;
+            color: black;
+        }
 input {
     padding-left: 0.6rem;
     padding-right: 2.5rem;
@@ -181,7 +183,9 @@ input {
     color:black;
 }
 
-
+.home-container {
+    background-color: #F3EFE8;
+}
 .about-header {
     font-family: Source Serif Pro;
     position: absolute;
@@ -330,6 +334,69 @@ th, td{
     white-space: nowrap;
     /*scroll-behavior: smooth;*/
 }
+
+/***************************/
+
+.wrapper-two {
+    max-width: 1200px;
+    position: relative;
+}
+
+    .wrapper-two i {
+        background: #fff;
+        height: 46px;
+        width: 46px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        position: absolute;
+        text-align: center;
+        line-height: 46px;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+        .wrapper-two i:first-child {
+            left: -23px;
+            z-index: 1;
+        }
+
+        .wrapper-two i:last-child {
+            right: -23px;
+        }
+
+    .wrapper-two .carousel-two {
+        font-size: 0px;
+        cursor: pointer;
+        overflow: hidden;
+        white-space: nowrap;
+        /*scroll-behavior: smooth;*/
+    }
+.carousel-two img {
+    height: 500px;
+    object-fit: cover;
+    margin-left: 14px;
+    width: calc(100% / 3);
+}
+
+    .carousel-two img:first-child {
+        margin-left: 0px;
+    }
+
+@media screen and (max-width: 900px) {
+    .carousel-two img {
+        width: calc(100% / 2);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .carousel-two img {
+        width: 100%;
+    }
+}
+/*********************/
+
+
 .carousel img{
     height: 500px;
     object-fit: cover;
@@ -371,6 +438,7 @@ th, td{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     box-shadow: 0.5px 0.5px 5px #514D4C;
+    color: black;
 }
     .save-button:hover {
         box-shadow: 1px 1px 10px #514D4C;
@@ -422,7 +490,6 @@ th, td{
 
     .modal-body input:focus {
         outline-color: #3f3f40;
-        /*outline-style: solid;*/
     }
 
 .modal-footer-text {
@@ -435,17 +502,19 @@ th, td{
     .modal-footer-text:hover{
         color:black;
     }
-    #blazor-error-ui {
-        background: lightyellow;
-        bottom: 0;
-        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-        display: none;
-        left: 0;
-        padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-        position: fixed;
-        width: 100%;
-        z-index: 1000;
-    }
+
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
 
     #blazor-error-ui .dismiss {
         cursor: pointer;
@@ -463,3 +532,10 @@ th, td{
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+@media only screen and (max-width: 320px) {
+
+    .heading-text {
+        font-size: 2em;
+    }
+}

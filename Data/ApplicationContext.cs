@@ -10,7 +10,6 @@ namespace Webshop.Data
     {
         public DbSet<BookingRequest> BookingRequests { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)

@@ -1,63 +1,16 @@
 ﻿@using Webshop.Pages
-@*<header class="header">
-    <div class="header-container">
-        <div class="header-nav-left">
-            <ul class="header-nav-menu">
-                <li class="header-nav-menu-item ms-3">
-                    <NavLink class="link-nav" href="/" Match="NavLinkMatch.All">
-                        home
-                        <hr />
-                    </NavLink>
-                </li>
-                <li class="header-nav-menu-item ms-5">
-                    <NavLink class="link-nav" href="/booking-request" Match="NavLinkMatch.All">
-                        booking request
-                        <hr />
-                    </NavLink>
-                </li>
-                <li class="header-nav-menu-item ms-5">
-                    <NavLink class="link-nav" href="/about-and-values" Match="NavLinkMatch.All">
-                        about & values
-                        <hr />
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-        <div class="header-nav-center">
-            <NavLink href="/">
-                <img src="/images-event/Fannie_Logotyp.png" width="300" style="margin-top: 4px;"/>
-            </NavLink>
-        </div>
-        <div class="header-nav-right">
-            <ul class="header-nav-menu">
-                <li class="header-nav-menu-item me-5">
-                    <NavLink class="link-nav" href="/gallery" Match="NavLinkMatch.All">
-                        gallery
-                        <hr />
-                    </NavLink>
-                </li>
-                <li class="header-nav-menu-item me-5">
-                    <NavLink class="link-nav" href="/admin-page" Match="NavLinkMatch.All">
-                        admin
-                        <hr />
-                    </NavLink>
-                </li>
-                <li class="header-nav-menu-item mb-1">
-                       <LoginDisplay />
-                </li>
-            </ul>
-        </div>
-    </div>
-</header>*@
-
 
 <header class="header">
-    <div class="header-container">
-        <NavLink href="/">
-            <img src="/images-event/Fannie_Logotyp.png" width="260" style="margin-top: 10px; margin-left:10px;" />
-        </NavLink>
-        <div class="header-nav-left ms-5">
-            <ul class="header-nav-menu">
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/images-event/Fannie_Logotyp.png" width="260" style="margin-top: 5px; margin-left:10px;" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="header-nav-menu-item me-5">
                     <NavLink class="link-nav" href="/" Match="NavLinkMatch.All">
                         home
@@ -83,18 +36,18 @@
                     </NavLink>
                 </li>
                 <li class="header-nav-menu-item me-5">
-                    <NavLink class="link-nav" href="/admin-page" Match="NavLinkMatch.All">
-                        admin
-                        <hr />
-                    </NavLink>
-                </li>
-                <li class="header-nav-menu-item mb-3 me-5">
-                    <LoginDisplay />
+                    <AuthorizeView>
+                        <Authorized>
+                            <NavLink href="Identity/Account/Logout" class="link-nav">sign out</NavLink>
+                        </Authorized>
+                        <NotAuthorized>
+                            <NavLink href="Identity/Account/Login" class="link-nav">sign in</NavLink>
+                        </NotAuthorized>
+                    </AuthorizeView>
                 </li>
             </ul>
         </div>
     </div>
+</nav>
 </header>
-
-<Login />
 
